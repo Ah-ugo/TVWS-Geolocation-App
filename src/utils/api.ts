@@ -88,15 +88,26 @@ class ApiService {
   }
 
   async queryTVWS(request: QueryRequest): Promise<QueryResponse> {
-    const response = await fetch(`${API_BASE_URL}/query-tvws`, {
-      method: "POST",
-      headers: this.getHeaders(),
-      body: JSON.stringify({
-        ...request,
-        time: new Date(request.time).toISOString(),
-      }),
-    });
-    return this.handleResponse(response);
+    try {
+      const response = await fetch(`${API_BASE_URL}/query-tvws`, {
+        method: "POST",
+        headers: this.getHeaders(),
+        body: JSON.stringify({
+          ...request,
+          time: new Date(request.time).toISOString(),
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || "Query failed");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("API Error:", error);
+      throw error; // Re-throw for component handling
+    }
   }
 
   async uploadMeasurements(request: UploadMeasurementRequest): Promise<void> {
