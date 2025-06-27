@@ -88,6 +88,7 @@ class ApiService {
   }
 
   async queryTVWS(request: QueryRequest): Promise<QueryResponse> {
+    console.log(request);
     try {
       const response = await fetch(`${API_BASE_URL}/query-tvws`, {
         method: "POST",

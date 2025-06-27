@@ -181,5 +181,5 @@ Database (MongoDB)
 For support and questions:
 
 - Create an issue on GitHub
-- Email: support@tvws.ng
+- Email: ahuekweprinceugo@gmail.com
 - Documentation: [API Docs](https://tvws-geolocation-api.onrender.com/docs)
